@@ -1,0 +1,21 @@
+<aura:component implements="force:hasRecordId,flexipage:availableForAllPageTypes"
+                access="global">
+
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="property" type="Property__c" />
+    
+    // Change URL with your own base URL for VF pages. In a real life app, you should obtain this value
+    // dynamically instead of hardcoding it.
+    <aura:attribute name="vfBaseURL" type="String" default="https://cc200-dev-ed--c.na35.visual.force.com"/>
+    
+    <force:recordPreview aura:id="service" recordId="{!v.recordId}" targetRecord="{!v.property}" 
+                         fields="['Id', 'Address__c', 'City__c', 'Location__Latitude__s', 'Location__Longitude__s']" />
+    
+    <aura:handler event="ltng:selectSObject" action="{!c.recordChangeHandler}"/>
+    <aura:handler name="change" value="{!v.property}" action="{!c.propertyChangeHandler}"/>
+
+    <div>
+        <iframe aura:id="vfFrame" src="{! v.vfBaseURL + '/apex/GoogleMap'}" frameborder="0" width="100%" height="376"/>
+    </div>
+    
+</aura:component>

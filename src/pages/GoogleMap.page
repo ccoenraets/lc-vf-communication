@@ -1,0 +1,47 @@
+<apex:page >
+<head>
+<style>
+  html { height: 100% }
+  body { height: 100%; margin: 0; padding: 0 }
+  #map { height: 100% }
+</style>
+</head>
+<body>
+	<div id="map"/>
+  	<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async="true" defer="true"></script>  
+	<script>
+        var map;
+        var marker;
+
+	    // Change URL with your own base URL for Lightning Experience. In a real life app, you should obtain this value
+    	// dynamically instead of hardcoding it.
+        var lexBaseURL = "https://cc200-dev-ed.lightning.force.com";
+    
+		function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: new google.maps.LatLng(42.356020, -71.085651),
+                zoom: 13
+            });
+        }
+        
+		function setMarker(property) {
+            var latLng = new google.maps.LatLng(property.Location__Latitude__s, property.Location__Longitude__s);
+            map.panTo(latLng);        
+            if (marker) {
+                marker.setPosition(latLng);
+            } else {
+                marker = new google.maps.Marker({position: latLng, map: map});
+            }
+        }
+        
+        window.addEventListener("message", function(event) {
+            if (event.origin !== lexBaseURL) {
+                return;
+            }
+            setMarker(event.data);
+		}, false);
+
+	</script>
+
+</body>
+</apex:page>

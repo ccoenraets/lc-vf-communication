@@ -1,0 +1,19 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+
+    // Change URL with your own base URL for Visualforce pages. In a real life app, you should obtain this value
+   	// dynamically instead of hardcoding it.
+    <aura:attribute name="vfBaseURL" type="String" default="https://cc200-dev-ed--c.na35.visual.force.com"/>
+
+    <aura:attribute name="message" type="String" default=""/>
+    <aura:attribute name="vfMessages" type="String" default=""/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <div>
+        <lightning:input type="text" label="Message:" value="{!v.message}"/>
+        <lightning:button label="Send to VF" onclick="{!c.sendToVF}"/>
+        <lightning:textArea label="Messages Received from VF:" value="{!v.vfMessages}"/>
+        <iframe aura:id="vfFrame" src="{! v.vfBaseURL + '/apex/WrappedVF'}" frameborder="0" width="100%" height="200"/>
+    </div>
+    
+</aura:component>
