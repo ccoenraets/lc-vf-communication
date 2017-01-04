@@ -1,6 +1,6 @@
 ({
     doInit : function(component, event, helper) {
-		var vfOrigin = component.get("v.vfOrigin");
+        var vfOrigin = "https://" + component.get("v.vfHost");
 		window.addEventListener("message", function(event) {
 			if (event.origin !== vfOrigin) {
 				// Not the expected origin: reject message
@@ -16,12 +16,12 @@
 	},
 
 	sendToVF : function(component, event, helper) {
-		var vfOrigin = component.get("v.vfOrigin");
+        var vfOrigin = "https://" + component.get("v.vfHost");
 		var vfWindow = component.find("vfFrame").getElement().contentWindow;
 		var message = {
 			name: "com.mycompany.chatmessage",
 			payload: component.get("v.message")
 		};
-		vfWindow.postMessage(message, vfOrigin);
+        vfWindow.postMessage(message, vfOrigin);
 	}
 })

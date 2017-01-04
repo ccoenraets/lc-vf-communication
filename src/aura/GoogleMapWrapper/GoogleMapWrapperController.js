@@ -8,7 +8,7 @@
     
   	propertyChangeHandler : function(component, event) {
 		var property = component.get("v.property");
-		var vfOrigin = component.get("v.vfOrigin");
+        var vfOrigin = "https://" + component.get("v.vfHost");
 		var vfWindow = component.find("vfFrame").getElement().contentWindow;
 		vfWindow.postMessage(property, vfOrigin);
 	}
