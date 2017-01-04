@@ -21,33 +21,33 @@
 	</div>
     
     <script>
-    
-    	var lexOrigin = "https://cc200-dev-ed.lightning.force.com";
-    
-    	var lcMessagesEl = document.getElementById("lcMessages");
-    
-	    window.addEventListener("message", function(event) {
-            if (event.origin !== lexOrigin) {
-	            // Not the expected origin: reject message
+
+		var lexOrigin = "https://cc200-dev-ed.lightning.force.com";
+
+		var lcMessagesEl = document.getElementById("lcMessages");
+
+		window.addEventListener("message", function(event) {
+			if (event.origin !== lexOrigin) {
+				// Not the expected origin: reject message
 				return;
 			}
-            // Only handle messages we are interested in            
-            if (event.data.name === "com.mycompany.chatmessage") {
+			// Only handle messages we are interested in            
+			if (event.data.name === "com.mycompany.chatmessage") {
 				var messages = lcMessagesEl.value;
-    	        messages = messages + event.data.payload + "\n";
-        	    lcMessages.value = messages;
+				messages = messages + event.data.payload + "\n";
+				lcMessages.value = messages;
 			}
 		}, false);
-    
-    	function sendToLC() {
-            var payload = document.getElementById("message").value;
-            var message = {
-                name: "com.mycompany.chatmessage",
-                payload: payload
-            };
-            parent.postMessage(message, lexOrigin);
-        }
-    
+
+		function sendToLC() {
+			var payload = document.getElementById("message").value;
+			var message = {
+				name: "com.mycompany.chatmessage",
+				payload: payload
+			};
+			parent.postMessage(message, lexOrigin);
+		}
+
     </script>
         
 </body>

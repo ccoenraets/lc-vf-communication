@@ -10,32 +10,32 @@
 	<div id="map"/>
   	<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async="true" defer="true"></script>  
 	<script>
-        var map;
-        var marker;
-        var lexOrigin = "https://cc200-dev-ed.lightning.force.com";
-    
+		var map;
+		var marker;
+		var lexOrigin = "https://cc200-dev-ed.lightning.force.com";
+
 		function initMap() {
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: new google.maps.LatLng(42.356020, -71.085651),
-                zoom: 13
-            });
-        }
-        
+			map = new google.maps.Map(document.getElementById("map"), {
+				center: new google.maps.LatLng(42.356020, -71.085651),
+				zoom: 13
+			});
+		}
+
 		function setMarker(property) {
-            var latLng = new google.maps.LatLng(property.Location__Latitude__s, property.Location__Longitude__s);
-            map.panTo(latLng);        
-            if (marker) {
-                marker.setPosition(latLng);
-            } else {
-                marker = new google.maps.Marker({position: latLng, map: map});
-            }
-        }
-        
-        window.addEventListener("message", function(event) {
-            if (event.origin !== lexOrigin) {
-                return;
-            }
-            setMarker(event.data);
+			var latLng = new google.maps.LatLng(property.Location__Latitude__s, property.Location__Longitude__s);
+			map.panTo(latLng);
+			if (marker) {
+				marker.setPosition(latLng);
+			} else {
+				marker = new google.maps.Marker({position: latLng, map: map});
+			}
+		}
+
+		window.addEventListener("message", function(event) {
+			if (event.origin !== lexOrigin) {
+				return;
+			}
+			setMarker(event.data);
 		}, false);
 
 	</script>
