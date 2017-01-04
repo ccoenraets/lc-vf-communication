@@ -5,21 +5,21 @@
 </head>
 <body style="background-color: #F0F2F5">
 	<strong>This gray area is Visualforce page embedded in the Lightning Component with an iframe:</strong>
-    
+
 	<div class="slds-form-element">
-  		<label class="slds-form-element__label" for="message">Message:</label>
-  		<div class="slds-form-element__control">
-    		<input id="message" class="slds-input" type="text" />
-  		</div>
+		<label class="slds-form-element__label" for="message">Message:</label>
+		<div class="slds-form-element__control">
+			<input id="message" class="slds-input" type="text" />
+		</div>
 	</div>
-    <button class="slds-button slds-button--neutral slds-m-vertical--xx-small" onclick="sendToLC()">Send to LC</button>
+	<button class="slds-button slds-button--neutral slds-m-vertical--xx-small" onclick="sendToLC()">Send to LC</button>
 	<div class="slds-form-element">
-  		<label class="slds-form-element__label" for="lcMessages">Messages Received from Lightning Component:</label>
-  		<div class="slds-form-element__control">
-    		<textarea class="slds-textarea" id="lcMessages"></textarea>
-  		</div>
+		<label class="slds-form-element__label" for="lcMessages">Messages Received from Lightning Component:</label>
+		<div class="slds-form-element__control">
+			<textarea class="slds-textarea" id="lcMessages"></textarea>
+		</div>
 	</div>
-    
+
     <script>
 
 		var lexOrigin = "https://cc200-dev-ed.lightning.force.com";
