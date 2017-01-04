@@ -1,19 +1,27 @@
 ({
     doInit : function(component, event, helper) {
-        var vfBaseURL = component.get("v.vfBaseURL");
+        var vfOrigin = component.get("v.vfOrigin");
 		window.addEventListener("message", function(event) {
-            if (event.origin !== vfBaseURL) {
+            if (event.origin !== vfOrigin) {
+   	            // Not the expected origin: reject message
 				return;
 			}
-            var vfMessages = component.get("v.vfMessages");
-            vfMessages = vfMessages + event.data + "\n";
-            component.set("v.vfMessages", vfMessages);
+            // Only handle messages we are interested in
+            if (event.data.name === "com.mycompany.chatmessage") {
+	            var vfMessages = component.get("v.vfMessages");
+    	        vfMessages = vfMessages + event.data.payload + "\n";
+        	    component.set("v.vfMessages", vfMessages);
+            }
 		}, false);
     },
 
     sendToVF : function(component, event, helper) {
-        var vfBaseURL = component.get("v.vfBaseURL");
+        var vfOrigin = component.get("v.vfOrigin");
         var vfWindow = component.find("vfFrame").getElement().contentWindow;
-		vfWindow.postMessage(component.get("v.message"), vfBaseURL);
+        var message = {
+            name: "com.mycompany.chatmessage",
+            payload: component.get("v.message")
+        };
+		vfWindow.postMessage(message, vfOrigin);
 	}
 })

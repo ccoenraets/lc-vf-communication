@@ -12,10 +12,7 @@
 	<script>
         var map;
         var marker;
-
-	    // Change URL with your own base URL for Lightning Experience. In a real life app, you should obtain this value
-    	// dynamically instead of hardcoding it.
-        var lexBaseURL = "https://cc200-dev-ed.lightning.force.com";
+        var lexOrigin = "https://cc200-dev-ed.lightning.force.com";
     
 		function initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
@@ -35,7 +32,7 @@
         }
         
         window.addEventListener("message", function(event) {
-            if (event.origin !== lexBaseURL) {
+            if (event.origin !== lexOrigin) {
                 return;
             }
             setMarker(event.data);

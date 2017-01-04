@@ -1,5 +1,6 @@
 ({
   	recordChangeHandler : function(component, event) {
+        console.log("recordChangeHandler");
         var id = event.getParam("recordId");
         component.set("v.recordId", id);
         var service = component.find("service");
@@ -7,9 +8,10 @@
 	},
     
   	propertyChangeHandler : function(component, event) {
+        console.log("propertyChangeHandler");
         var property = component.get("v.property");
-        var vfBaseURL = component.get("v.vfBaseURL");
+        var vfOrigin = component.get("v.vfOrigin");
         var vfWindow = component.find("vfFrame").getElement().contentWindow;
-		vfWindow.postMessage(property, vfBaseURL);
+		vfWindow.postMessage(property, vfOrigin);
 	}
 })
